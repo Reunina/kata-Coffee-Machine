@@ -280,7 +280,7 @@ public class CustomerOrderTest {
     //testing report
 
 
-    public String reportPath = "src/test/resources/dataReport/report.txt";
+    public String reportPath = "src/test/resources/dataReport/data_report.txt";
 
 
     @Test
@@ -365,6 +365,7 @@ public class CustomerOrderTest {
 
         CustomerOrder firstOrder = new CustomerOrder('C', 2, 2.0);
         CustomerOrder secondOrder = new CustomerOrder('T', 2, 4.0);
+        CustomerOrder thirdOrder = new CustomerOrder('T', 2, 4.0);
 
         firstOrder.makeTheDrink();
 
@@ -376,13 +377,14 @@ public class CustomerOrderTest {
                 .isEqualTo(expectedTotalAfterFirstOrder);
 
         secondOrder.makeTheDrink();
+        thirdOrder.makeTheDrink();
 
-        String expectedTotalAfterSecondOrder = "C:1 T:2";
-        String actualTotalAfterSecondOrder = report.print_sold_drinks();
+        String expectedTotalAfterLastOrder = "C:1 T:2";
+        String actualTotalAfterLastOrder = report.print_sold_drinks();
 
-        assertThat(actualTotalAfterSecondOrder)
-                .as("Should have " + expectedTotalAfterSecondOrder + " instead of " + actualTotalAfterSecondOrder)
-                .isEqualTo(expectedTotalAfterSecondOrder);
+        assertThat(actualTotalAfterLastOrder)
+                .as("Should have " + expectedTotalAfterLastOrder + " instead of " + actualTotalAfterLastOrder)
+                .isEqualTo(expectedTotalAfterLastOrder);
 
     }
 
