@@ -66,6 +66,9 @@ public class CustomerOrder {
             case 'H':
                 price = 0.5;
                 break;
+            case 'O':
+                price = 0.6;
+                break;
         }
         return price;
     }
