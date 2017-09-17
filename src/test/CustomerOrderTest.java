@@ -45,7 +45,7 @@ public class CustomerOrderTest {
     public void message_from_drink_maker_should_have_right_format() {
 
         String expectedOrder = "M:messageExpected";
-        String actualOrder = new CustomerOrder('T', 0, "messageExpected").toString();
+        String actualOrder = new CustomerOrder("messageExpected").getMessage();
         assertThat(actualOrder)
                 .as("Expected order is " + expectedOrder + " and not " + actualOrder)
                 .isEqualTo(expectedOrder);
