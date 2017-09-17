@@ -1,19 +1,24 @@
 package main;
 
 public class CustomerOrder {
-    private final String drinkType;
+    private final char drinkType;
     private final int sugar;
+    private final String message;
 
-    public CustomerOrder(String drinkType, int sugar) {
+    public CustomerOrder(char drinkType, int sugar, String message) {
         this.drinkType = drinkType;
         this.sugar = sugar;
+        this.message = "";
+    }
+    public CustomerOrder(char drinkType) {
+        this(drinkType, 0, "");
     }
 
-    public CustomerOrder(String drinkType) {
-        this(drinkType, 0);
+    public CustomerOrder(char drinkType, int sugar) {
+        this(drinkType, sugar, "");
     }
 
-    public String getDrinkType() {
+    public char getDrinkType() {
         return drinkType;
     }
 
