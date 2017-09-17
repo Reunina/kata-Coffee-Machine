@@ -23,7 +23,7 @@ public class CustomerOrderTest {
     public void order_for_1_chocolate_with_0_sugar_and_no_stick_should_have_right_format() {
 
         String expectedOrder = "H::";
-        String actualOrder = new CustomerOrder('H').toString();
+        String actualOrder = new CustomerOrder('H',0).toString();
         assertThat(actualOrder)
                 .as("Expected order is " + expectedOrder + " and not " + actualOrder)
                 .isEqualTo(expectedOrder);
@@ -33,7 +33,7 @@ public class CustomerOrderTest {
     @Test
     public void order_for_1_coffee_with_2_sugars_and_a_stick_should_have_right_format() {
 
-        String expectedOrder = "C:2:0:";
+        String expectedOrder = "C:2:0";
         String actualOrder = new CustomerOrder('C', 2).toString();
         assertThat(actualOrder)
                 .as("Expected order is " + expectedOrder + " and not " + actualOrder)
@@ -60,7 +60,6 @@ public class CustomerOrderTest {
         assertThat(actualDrink)
                 .as("Expected drink is " + expectedDrink + " instead of " + actualDrink)
                 .isEqualTo(expectedDrink);
-
 
     }
 

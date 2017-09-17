@@ -10,6 +10,7 @@ public class CustomerOrder {
         this.sugar = sugar;
         this.message = message;
     }
+
     public CustomerOrder(char drinkType) {
         this(drinkType, 0, "");
     }
@@ -35,6 +36,15 @@ public class CustomerOrder {
     }
 
     public String getMessage() {
-        return "M:"+message;
+        return "M:" + message;
+    }
+
+    @Override
+    public String toString() {
+        String order = drinkType + ":";
+        if (isStickAdded()) {
+            order += sugar + ":0";
+        } else order += ":";
+        return order;
     }
 }
