@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class Report {
     private final Path reportPath;
-    Map<String, Integer> soldDrinks = new HashMap<>();
+    private Map<String, Integer> soldDrinks = new HashMap<>();
 
     public Report(String reportPath) {
         this.reportPath = Paths.get(reportPath);
@@ -37,6 +37,7 @@ public class Report {
     }
 
     public String print_sold_drinks() {
+        soldDrinks = new HashMap<>();
         try {
             Files.lines(reportPath)
                     .map(this::getDrink)
@@ -53,7 +54,8 @@ public class Report {
     private void addDrink(String drink) {
         if (soldDrinks.containsKey(drink)) {
             int newCount = soldDrinks.get(drink) + 1;
-            soldDrinks.replace(drink, newCount);
+            soldDrinks.remove(drink);
+            soldDrinks.put(drink, newCount);
         } else {
             soldDrinks.put(drink, 1);
         }
