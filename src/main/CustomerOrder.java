@@ -4,24 +4,29 @@ public class CustomerOrder {
     private final char drinkType;
     private final int sugar;
     private final String message;
-    private double price;
+    private double inputMoney;
 
-    public CustomerOrder(char drinkType, int sugar, String message) {
+    public CustomerOrder(char drinkType, int sugar, String message, double inputMoneys) {
         this.drinkType = drinkType;
         this.sugar = sugar;
         this.message = message;
+        this.inputMoney = inputMoneys;
     }
 
     public CustomerOrder(char drinkType) {
-        this(drinkType, 0, "");
+        this(drinkType, 0, "", 0.0);
     }
 
     public CustomerOrder(char drinkType, int sugar) {
-        this(drinkType, sugar, "");
+        this(drinkType, sugar, "", 0.0);
+    }
+
+    public CustomerOrder(char drinkType, double inputMoney) {
+        this(drinkType, 0, "", inputMoney);
     }
 
     public CustomerOrder(String message) {
-        this('T', 0, message);
+        this('T', 0, message, 0.0);
     }
 
     public char getDrinkType() {
@@ -50,7 +55,7 @@ public class CustomerOrder {
     }
 
     public double getPrice() {
-
+        double price = 0.0;
         switch (drinkType) {
             case 'T':
                 price = 0.4;
@@ -63,5 +68,10 @@ public class CustomerOrder {
                 break;
         }
         return price;
+    }
+
+    public boolean makeTheDrink(){
+        return inputMoney >= getPrice();
+
     }
 }

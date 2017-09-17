@@ -161,6 +161,45 @@ public class CustomerOrderTest {
                 .isEqualTo(expectedPrice);
     }
 
+    @Test
+    public void the_drink_maker_should_make_the_drinks_if_the_correct_amount_of_money_is_given() {
+
+        CustomerOrder order = new CustomerOrder('H', 0.5);
+        assertThat(order.makeTheDrink())
+                .as("The drink should be make with the right amount of money.")
+                .isTrue();
+    }
+
+    @Test
+    public void the_drink_maker_should_not_make_the_drinks_if_not_enough_money_is_not_given() {
+
+        CustomerOrder order = new CustomerOrder('H', 0.2);
+        assertThat(order.makeTheDrink())
+                .as("The drink should not be make with not enough money.")
+                .isFalse();
+    }
+
+    @Test
+    public void the_drink_maker_should_not_make_the_drinks_if_no_money_is_given() {
+
+        CustomerOrder order = new CustomerOrder('H', 0.0);
+        assertThat(order.makeTheDrink())
+                .as("The drink should not be make with no money.")
+                .isFalse();
+    }
+    @Test
+    public void the_drink_maker_should_make_the_drinks_if_more_of_money_is_given() {
+
+        CustomerOrder order = new CustomerOrder('H', 12.0);
+        assertThat(order.makeTheDrink())
+                .as("The drink should be make with more than enough money.")
+                .isTrue();
+    }
+    //_The_message_should_contains_at_least_the_amount_of_money_missing.
+    @Test
+    public void the_drink_maker_should_received_a_message_if_not_enough_money_is_given() {
+
+    }
 
 
 }
