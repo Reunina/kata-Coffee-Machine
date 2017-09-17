@@ -23,7 +23,7 @@ public class CustomerOrderTest {
     public void order_for_1_chocolate_with_0_sugar_and_no_stick_should_have_right_format() {
 
         String expectedOrder = "H::";
-        String actualOrder = new CustomerOrder('H',0).toString();
+        String actualOrder = new CustomerOrder('H', 0).toString();
         assertThat(actualOrder)
                 .as("Expected order is " + expectedOrder + " and not " + actualOrder)
                 .isEqualTo(expectedOrder);
@@ -127,5 +127,40 @@ public class CustomerOrderTest {
                 .as("Should be a stick added to the order")
                 .isFalse();
     }
+
+    // testing money handling
+
+    @Test
+    public void ordering_a_tea_cost_40_cents() {
+        CustomerOrder order = new CustomerOrder('T');
+        double expectedPrice = 0.4;
+        double actualPrice = order.getPrice();
+        assertThat(actualPrice)
+                .as("The price should be "+expectedPrice+" for ordering "+order.getDrinkType())
+                .isEqualTo(expectedPrice);
+
+    }
+
+    @Test
+    public void ordering_a_coffee_cost_60_cents() {
+        CustomerOrder order = new CustomerOrder('C');
+        double expectedPrice = 0.6;
+        double actualPrice = order.getPrice();
+        assertThat(actualPrice)
+                .as("The price should be "+expectedPrice+" for ordering "+order.getDrinkType())
+                .isEqualTo(expectedPrice);
+    }
+
+    @Test
+    public void ordering_a_chocolate_cost_50_cents() {
+        CustomerOrder order = new CustomerOrder('H');
+        double expectedPrice = 0.5;
+        double actualPrice = order.getPrice();
+        assertThat(actualPrice)
+                .as("The price should be "+expectedPrice+" for ordering "+order.getDrinkType())
+                .isEqualTo(expectedPrice);
+    }
+
+
 
 }
