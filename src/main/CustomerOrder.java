@@ -3,6 +3,7 @@ package main;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
@@ -120,12 +121,16 @@ public class CustomerOrder {
     }
 
     private void report(CustomerOrder order, double inputMoney, double price, boolean isTheDrinkMade) {
-        String reportPath = "src/test/resources/dataReport/data_report.txt";
+        Path reportPath = Paths.get("src/test/resources/dataReport/data_report.txt");
 
         double profit = isTheDrinkMade ? price : 0.0;
         String lineToReport = order.toString() + " " + inputMoney + " " + price + " " + profit + "\n";
         try {
-            Files.write(Paths.get(reportPath), lineToReport.getBytes(), StandardOpenOption.APPEND);
+
+           if( Files.notExists(reportPath)){
+                Files.createFile(reportPath);
+            }
+            Files.write(reportPath, lineToReport.getBytes(), StandardOpenOption.APPEND);
 
         } catch (IOException e) {
             e.printStackTrace();
