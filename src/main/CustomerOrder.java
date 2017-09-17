@@ -1,5 +1,11 @@
 package main;
 
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 public class CustomerOrder {
     private final char drinkType;
     private final int sugar;
@@ -23,6 +29,10 @@ public class CustomerOrder {
         this(drinkType, sugar, "", 0.0, false);
     }
 
+    public CustomerOrder(char drinkType, int sugar, double inputMoney) {
+        this(drinkType, sugar, "", inputMoney, false);
+    }
+
     public CustomerOrder(char drinkType, double inputMoney) {
         this(drinkType, 0, "", inputMoney, false);
     }
@@ -36,6 +46,10 @@ public class CustomerOrder {
     }
 
     public CustomerOrder(char drinkType, boolean isExtraHot, int sugar) {
+        this(drinkType, sugar, "", 0.0, isExtraHot);
+    }
+
+    public CustomerOrder(char drinkType, boolean isExtraHot, int sugar, double inputMoney) {
         this(drinkType, sugar, "", 0.0, isExtraHot);
     }
 
@@ -89,7 +103,10 @@ public class CustomerOrder {
     }
 
     public boolean makeTheDrink() {
-        return inputMoney >= getPrice();
+
+        boolean isTheDrinkMade = inputMoney >= getPrice();
+        report(this, inputMoney, getPrice(), isTheDrinkMade);
+        return isTheDrinkMade;
 
     }
 
@@ -101,4 +118,18 @@ public class CustomerOrder {
             return "Ko , do not make the drink. " + missingMoney + " euros are missing";
         }
     }
+
+    private void report(CustomerOrder order, double inputMoney, double price, boolean isTheDrinkMade) {
+        String reportPath = "src/test/resources/dataReport/data_report.txt";
+
+        double profit = isTheDrinkMade ? price : 0.0;
+        String lineToReport = order.toString() + " " + inputMoney + " " + price + " " + profit + "\n";
+        try {
+            Files.write(Paths.get(reportPath), lineToReport.getBytes(), StandardOpenOption.APPEND);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
