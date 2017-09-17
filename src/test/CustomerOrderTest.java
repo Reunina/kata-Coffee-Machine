@@ -195,10 +195,15 @@ public class CustomerOrderTest {
                 .as("The drink should be make with more than enough money.")
                 .isTrue();
     }
+
     //_The_message_should_contains_at_least_the_amount_of_money_missing.
     @Test
     public void the_drink_maker_should_received_a_message_if_not_enough_money_is_given() {
 
+        CustomerOrder order = new CustomerOrder('H', 0.2);
+        assertThat(order.getMessageForDrinkMaker())
+                .as("A message should be display when there is not enough money.")
+                .isNotBlank();
     }
 
 

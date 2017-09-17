@@ -74,4 +74,13 @@ public class CustomerOrder {
         return inputMoney >= getPrice();
 
     }
+
+    public String getMessageForDrinkMaker(){
+        if(makeTheDrink()){
+            return  "Ok , make the drink";
+        }else {
+            double missingMoney = getPrice() - inputMoney;
+            return  "Ko , do not make the drink. "+ missingMoney+" euros are missing";
+        }
+    }
 }
