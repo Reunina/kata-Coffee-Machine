@@ -55,7 +55,7 @@ public class CustomerOrderTest {
     public void order_for_1_extra_hot_coffee_with_no_sugar_should_have_right_format() {
 
         String expectedOrder = "Ch::";
-        String actualOrder = new CustomerOrder('C').toString();
+        String actualOrder = new CustomerOrder('C', true).toString();
         assertThat(actualOrder)
                 .as("Expected order is " + expectedOrder + " and not " + actualOrder)
                 .isEqualTo(expectedOrder);
@@ -65,8 +65,8 @@ public class CustomerOrderTest {
     @Test
     public void order_for_1_extra_hot_chocolate_with_1_sugar_and_a_stick_should_have_right_format() {
 
-        String expectedOrder = "Hh:1:";
-        String actualOrder = new CustomerOrder('H', 1).toString();
+        String expectedOrder = "Hh:1:0";
+        String actualOrder = new CustomerOrder('H', true, 1).toString();
         assertThat(actualOrder)
                 .as("Expected order is " + expectedOrder + " and not " + actualOrder)
                 .isEqualTo(expectedOrder);
@@ -76,8 +76,8 @@ public class CustomerOrderTest {
     @Test
     public void order_for_1_extra_hot_tea_with_2_sugar__and_a_stick_should_have_right_format() {
 
-        String expectedOrder = "Th:2:";
-        String actualOrder = new CustomerOrder('T', 2).toString();
+        String expectedOrder = "Th:2:0";
+        String actualOrder = new CustomerOrder('T', true, 2).toString();
         assertThat(actualOrder)
                 .as("Expected order is " + expectedOrder + " and not " + actualOrder)
                 .isEqualTo(expectedOrder);

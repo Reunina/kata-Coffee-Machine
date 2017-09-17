@@ -5,28 +5,38 @@ public class CustomerOrder {
     private final int sugar;
     private final String message;
     private double inputMoney;
+    private boolean isExtraHot;
 
-    public CustomerOrder(char drinkType, int sugar, String message, double inputMoneys) {
+    public CustomerOrder(char drinkType, int sugar, String message, double inputMoneys, boolean isExtraHot) {
         this.drinkType = drinkType;
         this.sugar = sugar;
         this.message = message;
         this.inputMoney = inputMoneys;
+        this.isExtraHot = isExtraHot;
     }
 
     public CustomerOrder(char drinkType) {
-        this(drinkType, 0, "", 0.0);
+        this(drinkType, 0, "", 0.0, false);
     }
 
     public CustomerOrder(char drinkType, int sugar) {
-        this(drinkType, sugar, "", 0.0);
+        this(drinkType, sugar, "", 0.0, false);
     }
 
     public CustomerOrder(char drinkType, double inputMoney) {
-        this(drinkType, 0, "", inputMoney);
+        this(drinkType, 0, "", inputMoney, false);
     }
 
     public CustomerOrder(String message) {
-        this('T', 0, message, 0.0);
+        this('T', 0, message, 0.0, false);
+    }
+
+    public CustomerOrder(char drinkType, boolean isExtraHot) {
+        this(drinkType, 0, "", 0.0, isExtraHot);
+    }
+
+    public CustomerOrder(char drinkType, boolean isExtraHot, int sugar) {
+        this(drinkType, sugar, "", 0.0, isExtraHot);
     }
 
     public char getDrinkType() {
@@ -47,7 +57,12 @@ public class CustomerOrder {
 
     @Override
     public String toString() {
-        String order = drinkType + ":";
+        String order;
+        if (isExtraHot) {
+            order = drinkType + "h" + ":";
+        } else {
+            order = drinkType + ":";
+        }
         if (isStickAdded()) {
             order += sugar + ":0";
         } else order += ":";
@@ -73,17 +88,17 @@ public class CustomerOrder {
         return price;
     }
 
-    public boolean makeTheDrink(){
+    public boolean makeTheDrink() {
         return inputMoney >= getPrice();
 
     }
 
-    public String getMessageForDrinkMaker(){
-        if(makeTheDrink()){
-            return  "Ok , make the drink";
-        }else {
+    public String getMessageForDrinkMaker() {
+        if (makeTheDrink()) {
+            return "Ok , make the drink";
+        } else {
             double missingMoney = getPrice() - inputMoney;
-            return  "Ko , do not make the drink. "+ missingMoney+" euros are missing";
+            return "Ko , do not make the drink. " + missingMoney + " euros are missing";
         }
     }
 }
