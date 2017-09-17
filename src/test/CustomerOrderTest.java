@@ -42,6 +42,49 @@ public class CustomerOrderTest {
     }
 
     @Test
+    public void order_for_1_orange_juice_should_have_right_format() {
+
+        String expectedOrder = "O::";
+        String actualOrder = new CustomerOrder('O').toString();
+        assertThat(actualOrder)
+                .as("Expected order is " + expectedOrder + " and not " + actualOrder)
+                .isEqualTo(expectedOrder);
+
+    }
+    @Test
+    public void order_for_1_extra_hot_coffee_with_no_sugar_should_have_right_format() {
+
+        String expectedOrder = "Ch::";
+        String actualOrder = new CustomerOrder('C').toString();
+        assertThat(actualOrder)
+                .as("Expected order is " + expectedOrder + " and not " + actualOrder)
+                .isEqualTo(expectedOrder);
+
+    }
+
+    @Test
+    public void order_for_1_extra_hot_chocolate_with_1_sugar_and_a_stick_should_have_right_format() {
+
+        String expectedOrder = "Hh:1:";
+        String actualOrder = new CustomerOrder('H', 1).toString();
+        assertThat(actualOrder)
+                .as("Expected order is " + expectedOrder + " and not " + actualOrder)
+                .isEqualTo(expectedOrder);
+
+    }
+
+    @Test
+    public void order_for_1_extra_hot_tea_with_2_sugar__and_a_stick_should_have_right_format() {
+
+        String expectedOrder = "Th:2:";
+        String actualOrder = new CustomerOrder('T', 2).toString();
+        assertThat(actualOrder)
+                .as("Expected order is " + expectedOrder + " and not " + actualOrder)
+                .isEqualTo(expectedOrder);
+
+    }
+
+    @Test
     public void message_from_drink_maker_should_have_right_format() {
 
         String expectedOrder = "M:messageExpected";
@@ -128,7 +171,8 @@ public class CustomerOrderTest {
                 .isFalse();
     }
 
-    // testing money handling
+
+    //testing prices
 
     @Test
     public void ordering_a_tea_cost_40_cents() {
@@ -162,6 +206,17 @@ public class CustomerOrderTest {
     }
 
     @Test
+    public void ordering_an_orange_juice_cost_60_cents() {
+        CustomerOrder order = new CustomerOrder('O');
+        double expectedPrice = 0.6;
+        double actualPrice = order.getPrice();
+        assertThat(actualPrice)
+                .as("The price should be "+expectedPrice+" for ordering "+order.getDrinkType())
+                .isEqualTo(expectedPrice);
+    }
+
+    // testing money handling
+    @Test
     public void the_drink_maker_should_make_the_drinks_if_the_correct_amount_of_money_is_given() {
 
         CustomerOrder order = new CustomerOrder('H', 0.5);
@@ -187,6 +242,7 @@ public class CustomerOrderTest {
                 .as("The drink should not be make with no money.")
                 .isFalse();
     }
+
     @Test
     public void the_drink_maker_should_make_the_drinks_if_more_of_money_is_given() {
 
